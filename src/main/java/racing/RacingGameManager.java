@@ -5,12 +5,15 @@ import car.CarFactory;
 import exception.RacingGameException;
 import type.ExceptionMessage;
 import util.CustomStringUtils;
+import util.RandonNumberUtils;
+
 import java.util.List;
 
 public class RacingGameManager {
 
 	private static final String REGEX = ",";
 	private static final int MAX_SIZE_FOR_CAR_NAME = 5;
+	private static final int STANDARD_RANGE_NUMBER = 10;
 
 	private CarFactory carFactory;
 
@@ -30,5 +33,11 @@ public class RacingGameManager {
 			throw new RacingGameException(ExceptionMessage.INVALID_SIZE_CAR_NAME);
 		}
 		return new Car(value);
+	}
+
+	public void movingCars(){
+		for(Car car : carFactory.getCarList()){
+			RacingGame.play(car, RandonNumberUtils.generate(STANDARD_RANGE_NUMBER));
+		}
 	}
 }

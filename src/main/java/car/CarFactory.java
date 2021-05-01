@@ -7,7 +7,7 @@ public class CarFactory {
 
 	private List<Car> carList = new ArrayList<>();
 
-	List<Car> getCarList() {
+	public List<Car> getCarList() {
 		return this.carList;
 	}
 
