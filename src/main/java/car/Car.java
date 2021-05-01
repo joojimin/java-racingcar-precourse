@@ -1,6 +1,7 @@
 package car;
 
 import exception.RacingGameException;
+import util.MessageUtils;
 import type.ExceptionMessage;
 import util.CustomStringUtils;
 
@@ -22,7 +23,7 @@ public class Car implements Comparable<Car>{
 	}
 
 	public String makeResult(){
-		return PlayResultMessage.makeMessage(this.name, this.position);
+		return MessageUtils.makePlayMessage(this.name, this.position);
 	}
 
 	public static Car getInstance(String value, int maxSizeForCarName){

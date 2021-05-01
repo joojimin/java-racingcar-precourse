@@ -4,6 +4,7 @@ import car.Car;
 import car.CarFactory;
 import util.ConsoleUtils;
 import util.CustomStringUtils;
+import util.MessageUtils;
 import util.RandonNumberUtils;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class RacingGameManager {
 			movingCars();
 			ConsoleUtils.printLine();
 		}
+		ConsoleUtils.print(MessageUtils.makeWinnerMessage(getWinnerList()));
 	}
 
 	private void movingCars(){
@@ -47,17 +49,17 @@ public class RacingGameManager {
 		ConsoleUtils.print(car.makeResult());
 	}
 
-	List<Car> getWinnerList(){
+	List<String> getWinnerList(){
 		Car winnerCar = carFactory.getMaxPositionCar();
-		List<Car> winnerCarList = new ArrayList<>();
-		carFactory.processAboutCarList(car -> assembleWinnerCar(car, winnerCar, winnerCarList));
-		return winnerCarList;
+		List<String> winnerCarNameList = new ArrayList<>();
+		carFactory.processAboutCarList(car -> assembleWinnerCar(car, winnerCar, winnerCarNameList));
+		return winnerCarNameList;
 	}
 
-	private void assembleWinnerCar(Car car, Car winnerCar, List<Car> winnerCarList){
+	private void assembleWinnerCar(Car car, Car winnerCar, List<String> winnerCarNameList){
 		if(car.getPosition() != winnerCar.getPosition()){
 			return;
 		}
-		winnerCarList.add(car);
+		winnerCarNameList.add(car.getName());
 	}
 }

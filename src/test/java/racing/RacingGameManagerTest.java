@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import type.ExceptionMessage;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -38,6 +37,7 @@ class RacingGameManagerTest {
 	}
 
 	@Test
+	@DisplayName("통합 게임 테스트(콘솔로 파악)")
 	void playGames() {
 		// given
 		RacingGameManager racingGameManager = new RacingGameManager(new CarFactory());
@@ -83,10 +83,8 @@ class RacingGameManagerTest {
 		racingGameManager.play(car1, 5); // car1을 우승자로 만들기위해 전진시킴
 
 		// when
-		List<Car> winnerList = racingGameManager.getWinnerList();
-
-		// then
-		assertThat(winnerList).hasSize(1);
+		assertThat(racingGameManager.getWinnerList())
+			.hasSize(1); // then
 	}
 
 	@Test
@@ -106,9 +104,7 @@ class RacingGameManagerTest {
 		racingGameManager.play(car2, 6); // car1을 우승자로 만들기위해 전진시킴
 
 		// when
-		List<Car> winnerList = racingGameManager.getWinnerList();
-
-		// then
-		assertThat(winnerList).hasSize(2);
+		assertThat(racingGameManager.getWinnerList())
+			.hasSize(2); // then
 	}
 }
