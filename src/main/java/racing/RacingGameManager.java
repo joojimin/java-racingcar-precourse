@@ -36,9 +36,7 @@ public class RacingGameManager {
 	}
 
 	private void movingCars(){
-		for(Car car : carFactory.getCarList()){
-			play(car, RandonNumberUtils.generate(STANDARD_RANGE_NUMBER));
-		}
+		carFactory.processAboutCarList(car-> play(car, RandonNumberUtils.generate(STANDARD_RANGE_NUMBER)));
 	}
 
 	void play(Car car, int i) {
