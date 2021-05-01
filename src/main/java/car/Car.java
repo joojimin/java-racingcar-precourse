@@ -4,7 +4,7 @@ import exception.RacingGameException;
 import type.ExceptionMessage;
 import util.CustomStringUtils;
 
-public class Car {
+public class Car implements Comparable<Car>{
 	private final String name;
 	private int position;
 
@@ -38,5 +38,10 @@ public class Car {
 		if(obj == null || getClass() != obj.getClass()) return false;
 		Car car  = (Car)obj;
 		return this.name.equals(car.getName());
+	}
+
+	@Override
+	public int compareTo(Car o) {
+		return Integer.compare(this.position, o.getPosition());
 	}
 }

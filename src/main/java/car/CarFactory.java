@@ -1,6 +1,7 @@
 package car;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -18,6 +19,10 @@ public class CarFactory {
 		for(Car car : this.carList){
 			consumer.accept(car);
 		}
+	}
+
+	public Car getMaxPositionCar(){
+		return Collections.max(carList);
 	}
 
 	List<Car> getCarList() {

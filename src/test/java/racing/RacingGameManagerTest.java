@@ -1,12 +1,14 @@
 package racing;
 
 import car.Car;
+import car.CarFactory;
 import exception.RacingGameException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import type.ExceptionMessage;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -15,14 +17,14 @@ class RacingGameManagerTest {
 	@Test
 	@DisplayName("5글자 이하의 자동차 이름으로 생성 테스트")
 	void createCarListTest(){
-		assertThatCode(()->new RacingGameManager().createCarList("a,b,c"))
+		assertThatCode(()->new RacingGameManager(new CarFactory()).createCarList("a,b,c"))
 			.doesNotThrowAnyException();
 	}
 
 	@Test
 	@DisplayName("0글자의 자동차 이름이 포함되어 있는 경우")
 	void createCarListWithEmptyNameTest(){
-		assertThatThrownBy(()->new RacingGameManager().createCarList("a,,c"))
+		assertThatThrownBy(()->new RacingGameManager(new CarFactory()).createCarList("a,,c"))
 			.isInstanceOf(RacingGameException.class)
 			.hasMessageContaining(ExceptionMessage.INVALID_SIZE_CAR_NAME.getMessage());
 	}
@@ -30,7 +32,7 @@ class RacingGameManagerTest {
 	@Test
 	@DisplayName("5글자 초과의 자동차 이름이 포함되어 있는 경우")
 	void createCarListWithOverSizeNameTest(){
-		assertThatThrownBy(()->new RacingGameManager().createCarList("a,dddddddddddd,c"))
+		assertThatThrownBy(()->new RacingGameManager(new CarFactory()).createCarList("a,dddddddddddd,c"))
 			.isInstanceOf(RacingGameException.class)
 			.hasMessageContaining(ExceptionMessage.INVALID_SIZE_CAR_NAME.getMessage());
 	}
@@ -38,7 +40,7 @@ class RacingGameManagerTest {
 	@Test
 	void playGames() {
 		// given
-		RacingGameManager racingGameManager = new RacingGameManager();
+		RacingGameManager racingGameManager = new RacingGameManager(new CarFactory());
 		racingGameManager.createCarList("a,b,c");
 
 		// when
@@ -55,7 +57,7 @@ class RacingGameManagerTest {
 	@DisplayName("레이싱 게임 테스트")
 	void gamePlayTest(int condition, boolean isMove){
 		// given
-		RacingGameManager racingGameManager = new RacingGameManager();
+		RacingGameManager racingGameManager = new RacingGameManager(new CarFactory());
 		Car car = new Car("");
 
 		// when
@@ -63,5 +65,50 @@ class RacingGameManagerTest {
 
 		// then
 		assertThat(car.getPosition() == 1).isEqualTo(isMove);
+	}
+
+	@Test
+	@DisplayName("우승자 한명 테스트")
+	void getOneWinnerListTest() {
+		// given
+		CarFactory carFactory = new CarFactory();
+		Car car1 = new Car("car1");
+		Car car2 = new Car("car2");
+		Car car3 = new Car("car3");
+		carFactory.add(car1)
+				  .add(car2)
+				  .add(car3);
+
+		RacingGameManager racingGameManager = new RacingGameManager(carFactory);
+		racingGameManager.play(car1, 5); // car1을 우승자로 만들기위해 전진시킴
+
+		// when
+		List<Car> winnerList = racingGameManager.getWinnerList();
+
+		// then
+		assertThat(winnerList).hasSize(1);
+	}
+
+	@Test
+	@DisplayName("우승자 두명 테스트")
+	void getMultiWinnerListTest() {
+		// given
+		CarFactory carFactory = new CarFactory();
+		Car car1 = new Car("car1");
+		Car car2 = new Car("car2");
+		Car car3 = new Car("car3");
+		carFactory.add(car1)
+				  .add(car2)
+				  .add(car3);
+
+		RacingGameManager racingGameManager = new RacingGameManager(carFactory);
+		racingGameManager.play(car1, 5); // car1을 우승자로 만들기위해 전진시킴
+		racingGameManager.play(car2, 6); // car1을 우승자로 만들기위해 전진시킴
+
+		// when
+		List<Car> winnerList = racingGameManager.getWinnerList();
+
+		// then
+		assertThat(winnerList).hasSize(2);
 	}
 }
