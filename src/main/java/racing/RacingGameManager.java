@@ -40,4 +40,10 @@ public class RacingGameManager {
 			RacingGame.play(car, RandonNumberUtils.generate(STANDARD_RANGE_NUMBER));
 		}
 	}
+
+	public void playGames(final GameCommand gameCommand){
+		while(gameCommand.isPlaying()){
+			movingCars();
+		}
+	}
 }
