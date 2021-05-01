@@ -16,7 +16,7 @@ class RacingGameTest {
 	@DisplayName("레이싱 게임 테스트")
 	void gamePlayTest(int condition, boolean isMove){
 		// given
-		Car car = new Car();
+		Car car = new Car("");
 
 		// when
 		RacingGame.play(car, condition);

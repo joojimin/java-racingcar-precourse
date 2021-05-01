@@ -11,7 +11,7 @@ public class CarTest {
 	@Test
 	void goTest(){
 		// given
-		Car car = new Car();
+		Car car = new Car("");
 
 		// when
 		car.go();
