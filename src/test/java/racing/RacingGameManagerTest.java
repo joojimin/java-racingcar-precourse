@@ -1,12 +1,14 @@
 package racing;
 
+import car.Car;
 import exception.RacingGameException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import type.ExceptionMessage;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class RacingGameManagerTest {
 
@@ -44,5 +46,22 @@ class RacingGameManagerTest {
 		
 		// then
 		// isEmpty.. print console
+	}
+
+	@ParameterizedTest(name = "[기준 숫자=''{0}''] , [이동 여부=''{1}'']")
+	@CsvSource(
+		{"1, false", "2, false", "3, false", "4, true", "5, true", "6, true", "7, true", "8, true", "9, true"}
+	)
+	@DisplayName("레이싱 게임 테스트")
+	void gamePlayTest(int condition, boolean isMove){
+		// given
+		RacingGameManager racingGameManager = new RacingGameManager();
+		Car car = new Car("");
+
+		// when
+		racingGameManager.play(car, condition);
+
+		// then
+		assertThat(car.getPosition() == 1).isEqualTo(isMove);
 	}
 }
