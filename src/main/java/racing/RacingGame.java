@@ -10,7 +10,7 @@ import util.RandonNumberUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RacingGameManager {
+public class RacingGame {
 
 	private static final String REGEX = ",";
 	private static final int MAX_SIZE_FOR_CAR_NAME = 5;
@@ -19,18 +19,18 @@ public class RacingGameManager {
 
 	private CarFactory carFactory;
 
-	public RacingGameManager(CarFactory carFactory){
+	public RacingGame(CarFactory carFactory){
 		this.carFactory = carFactory;
 	}
 
-	void createCarList(String inputData) {
+	public void createCarList(String inputData) {
 		List<String> splitList = CustomStringUtils.split(inputData, REGEX);
 		for(String value : splitList){
 			carFactory.add(Car.getInstance(value, MAX_SIZE_FOR_CAR_NAME));
 		}
 	}
 
-	void playGames(final GameCommand gameCommand){
+	public void playGames(final GameCommand gameCommand){
 		while(gameCommand.isPlaying()){
 			movingCars();
 			ConsoleUtils.printLine();
