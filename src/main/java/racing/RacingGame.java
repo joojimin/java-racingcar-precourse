@@ -10,6 +10,8 @@ import util.RandonNumberUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static type.GameMessage.GAME_RESULT;
+
 public class RacingGame {
 
 	private static final String REGEX = ",";
@@ -31,11 +33,13 @@ public class RacingGame {
 	}
 
 	public void playGames(final GameCommand gameCommand){
+		ConsoleUtils.printLine();
+		ConsoleUtils.printLine(GAME_RESULT.getMessage());
 		while(gameCommand.isPlaying()){
 			movingCars();
 			ConsoleUtils.printLine();
 		}
-		ConsoleUtils.print(MessageUtils.makeWinnerMessage(getWinnerList()));
+		ConsoleUtils.printLine(MessageUtils.makeWinnerMessage(getWinnerList()));
 	}
 
 	private void movingCars(){
@@ -46,7 +50,7 @@ public class RacingGame {
 		if(i >= MIN_CONDITION_FOR_MOVING){
 			car.go();
 		}
-		ConsoleUtils.print(car.makeResult());
+		ConsoleUtils.printLine(car.makeResult());
 	}
 
 	List<String> getWinnerList(){

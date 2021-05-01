@@ -1,8 +1,8 @@
 package util;
 
-import type.GameMessage;
-
 import java.util.List;
+
+import static type.GameMessage.GAME_WINNER;
 
 public class MessageUtils {
 
@@ -16,7 +16,7 @@ public class MessageUtils {
 
 	public static String makeWinnerMessage(final List<String> list){
 		return new StringBuilder(String.join(",", list))
-			.append(GameMessage.GAME_WINNER.getMessage())
+			.append(GAME_WINNER.getMessage())
 			.toString();
 	}
 }

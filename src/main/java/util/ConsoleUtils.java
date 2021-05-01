@@ -1,9 +1,21 @@
 package util;
 
+import java.util.Scanner;
+
 public class ConsoleUtils {
 
-	public static void print(String message){
+	public static void printLine(String message){
 		System.out.println(message);
 	}
-	public static void printLine(){ print(""); }
+	public static void printLine(){ printLine(""); }
+
+	public static String nextString(String inputMessage){
+		printLine(inputMessage);
+		return new Scanner(System.in).next();
+	}
+
+	public static int nextInt(String inputMessage){
+		printLine(inputMessage);
+		return new Scanner(System.in).nextInt();
+	}
 }
