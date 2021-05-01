@@ -4,6 +4,7 @@ import car.Car;
 import car.CarFactory;
 import exception.RacingGameException;
 import type.ExceptionMessage;
+import util.ConsoleUtils;
 import util.CustomStringUtils;
 import util.RandonNumberUtils;
 
@@ -35,15 +36,16 @@ public class RacingGameManager {
 		return new Car(value);
 	}
 
-	public void movingCars(){
-		for(Car car : carFactory.getCarList()){
-			RacingGame.play(car, RandonNumberUtils.generate(STANDARD_RANGE_NUMBER));
-		}
-	}
-
 	public void playGames(final GameCommand gameCommand){
 		while(gameCommand.isPlaying()){
 			movingCars();
+			ConsoleUtils.printLine();
+		}
+	}
+
+	public void movingCars(){
+		for(Car car : carFactory.getCarList()){
+			RacingGame.play(car, RandonNumberUtils.generate(STANDARD_RANGE_NUMBER));
 		}
 	}
 }

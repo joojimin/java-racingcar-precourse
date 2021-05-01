@@ -32,4 +32,17 @@ class RacingGameManagerTest {
 			.isInstanceOf(RacingGameException.class)
 			.hasMessageContaining(ExceptionMessage.INVALID_SIZE_CAR_NAME.getMessage());
 	}
+
+	@Test
+	void playGames() {
+		// given
+		RacingGameManager racingGameManager = new RacingGameManager();
+		racingGameManager.createCarList("a,b,c");
+
+		// when
+		racingGameManager.playGames(new GameCommand(5));
+		
+		// then
+		// isEmpty.. print console
+	}
 }

@@ -17,6 +17,10 @@ public class Car {
 		this.position += 1;
 	}
 
+	public String makeResult(){
+		return PlayResultMessage.makeMessage(this.name, this.position);
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if(this == obj) return true;
