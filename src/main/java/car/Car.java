@@ -1,5 +1,9 @@
 package car;
 
+import exception.RacingGameException;
+import type.ExceptionMessage;
+import util.CustomStringUtils;
+
 public class Car {
 	private final String name;
 	private int position;
@@ -19,6 +23,13 @@ public class Car {
 
 	public String makeResult(){
 		return PlayResultMessage.makeMessage(this.name, this.position);
+	}
+
+	public static Car getInstance(String value, int maxSizeForCarName){
+		if(false == CustomStringUtils.isValidSize(value, maxSizeForCarName)){
+			throw new RacingGameException(ExceptionMessage.INVALID_SIZE_CAR_NAME);
+		}
+		return new Car(value);
 	}
 
 	@Override

@@ -2,8 +2,6 @@ package racing;
 
 import car.Car;
 import car.CarFactory;
-import exception.RacingGameException;
-import type.ExceptionMessage;
 import util.ConsoleUtils;
 import util.CustomStringUtils;
 import util.RandonNumberUtils;
@@ -26,15 +24,8 @@ public class RacingGameManager {
 	void createCarList(String inputData) {
 		List<String> splitList = CustomStringUtils.split(inputData, REGEX);
 		for(String value : splitList){
-			carFactory.add(makeCar(value));
+			carFactory.add(Car.getInstance(value, MAX_SIZE_FOR_CAR_NAME));
 		}
-	}
-
-	private Car makeCar(String value){
-		if(false == CustomStringUtils.isValidSize(value, MAX_SIZE_FOR_CAR_NAME)){
-			throw new RacingGameException(ExceptionMessage.INVALID_SIZE_CAR_NAME);
-		}
-		return new Car(value);
 	}
 
 	void playGames(final GameCommand gameCommand){
