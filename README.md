@@ -39,3 +39,9 @@
 11.  콘솔로 사용자의 데이터를 입력 받는 기능
     *   1이상의 게임 플레이 횟수를 입력받는다
     *   자동차 이름을 입력받는다.
+
+
+## 프로그램 실행 예시
+main : Application class
+
+<img width="416" alt="스크린샷 2021-05-03 오후 10 09 38" src="https://user-images.githubusercontent.com/20411308/116880209-b2b35d00-ac5c-11eb-9698-e36cf7ac1d4f.png">
