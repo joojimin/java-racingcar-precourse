@@ -13,14 +13,9 @@ public class CarFactoryTest {
 		// given
 		Car car1 = new Car("car1");
 		Car car2 = new Car("car2");
-		CarFactory carFactory = new CarFactory();
-
-		// when
-		carFactory.add(new Car("car1"))
-				  .add(new Car("car2"));
 
 		// then
-		assertThat(carFactory.getCarList())
+		assertThat(new CarFactory("car1,car2").getCarList())
 			.isNotNull()
 			.hasSize(2)
 			.contains(car1, car2);

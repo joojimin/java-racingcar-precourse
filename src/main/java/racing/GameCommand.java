@@ -7,10 +7,6 @@ public class GameCommand {
 		this.gameCount = gameCount;
 	}
 
-	public int getGameCount(){
-		return this.gameCount;
-	}
-
 	public boolean isPlaying(){
 		if(gameCount == 0) return false;
 		this.gameCount -= 1;

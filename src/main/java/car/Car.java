@@ -1,11 +1,15 @@
 package car;
 
 import exception.RacingGameException;
+import util.ConsoleUtils;
 import util.MessageUtils;
 import type.ExceptionMessage;
 import util.CustomStringUtils;
 
 public class Car implements Comparable<Car>{
+	private static final int MAX_SIZE_FOR_CAR_NAME = 5;
+	private final static int MIN_CONDITION_FOR_MOVING = 4;
+
 	private final String name;
 	private int position;
 
@@ -18,19 +22,27 @@ public class Car implements Comparable<Car>{
 	}
 	public String getName(){ return this.name; }
 
-	public void go() {
-		this.position += 1;
-	}
-
 	public String makeResult(){
 		return MessageUtils.makePlayMessage(this.name, this.position);
 	}
 
-	public static Car getInstance(String value, int maxSizeForCarName){
-		if(false == CustomStringUtils.isValidSize(value, maxSizeForCarName)){
+	public void play(int i) {
+		if(i >= MIN_CONDITION_FOR_MOVING){
+			go();
+		}
+		ConsoleUtils.printLine(makeResult());
+	}
+
+	void go() {
+		this.position += 1;
+	}
+
+
+	public static Car getInstance(String name){
+		if(false == CustomStringUtils.isValidSize(name, MAX_SIZE_FOR_CAR_NAME)){
 			throw new RacingGameException(ExceptionMessage.INVALID_SIZE_CAR_NAME);
 		}
-		return new Car(value);
+		return new Car(name);
 	}
 
 	@Override
