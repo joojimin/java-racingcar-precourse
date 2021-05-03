@@ -31,7 +31,7 @@ public class CarFactory {
 		List carList = new ArrayList();
 		List<String> splitList = CustomStringUtils.split(inputData, REGEX);
 		for(String value : splitList){
-			carList.add(Car.getInstance(value));
+			carList.add(Car.getInstance(value.trim()));
 		}
 		return Collections.unmodifiableList(carList);
 	}

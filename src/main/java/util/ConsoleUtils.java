@@ -11,7 +11,7 @@ public class ConsoleUtils {
 
 	public static String nextString(String inputMessage){
 		printLine(inputMessage);
-		return new Scanner(System.in).next();
+		return new Scanner(System.in).nextLine();
 	}
 
 	public static int nextInt(String inputMessage){
